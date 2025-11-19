@@ -7,7 +7,6 @@ terraform {
       version = "~> 5.0"
     }
   }
-
   backend "s3" {
     bucket = "s3-backend-teralab3-grupo-1"
     key    = "backend/terraform.tfstate"
