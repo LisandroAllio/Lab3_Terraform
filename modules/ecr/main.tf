@@ -1,5 +1,10 @@
+locals {
+  name_front        = "lab/front"
+  name_bd           = "lab/bd-mysql"
+}
+
 resource "aws_ecr_repository" "repositorio_front" {
-  name                 = var.name_front
+  name                 = local.name_front
   image_tag_mutability = var.image_tag_mutability
   encryption_configuration {
     encryption_type = var.encryption_type
@@ -11,13 +16,13 @@ resource "aws_ecr_repository" "repositorio_front" {
 
   tags = {
     Name        = "ECR Repository Frontend"
-    Environment = "dev"
+    Environment = var.environment
     Owner       = "Lara"
   }
 }
 
 resource "aws_ecr_repository" "repositorio_bd" {
-  name                 = var.name_bd
+  name                 = local.name_bd
   image_tag_mutability = var.image_tag_mutability
 
   encryption_configuration {
@@ -30,7 +35,7 @@ resource "aws_ecr_repository" "repositorio_bd" {
 
   tags = {
     Name        = "ECR Repository Base de Datos"
-    Environment = "dev"
+    Environment = var.environment
     Owner       = "Lara"
   }
 }

@@ -6,7 +6,6 @@ variable "vpc_id" {
 variable "subnets_ids" {
     description = "Lista de IDs de las subnets para el ALB"
     type = set(string)
-  
 }
 
 variable "certificate_arn" {
