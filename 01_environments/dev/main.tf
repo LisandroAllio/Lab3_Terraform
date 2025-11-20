@@ -29,8 +29,9 @@ module "vpc" {
   single_nat_gateway = false  #por default se crean 1 por az. Con esto solo creamos 1
 
   tags = {
-    Terraform = "true"
+    Name        = "VPC"
     Environment = "dev"
+    Owner       = "Lisandro"
   }
 }
 
