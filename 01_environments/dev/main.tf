@@ -34,6 +34,16 @@ module "vpc" {
   }
 }
 
+#### ALB & Target Group ####
+module "alb" {
+    source = "../../modules/alb"
+    
+    vpc_id = module.vpc.vpc_id
+    subnets_ids = module.vpc.public_subnets
+    certificate_arn = "" #Agregar
+    security_group_ids = [] #Agregar
+}
+
 #### ECR ####
 module "ecr" {
     source = "../../modules/ecr"
