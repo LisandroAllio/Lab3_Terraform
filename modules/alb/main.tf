@@ -1,29 +1,35 @@
+locals {
+  tg_name = "lab-target-group"
+  alb_name = "lab-alb"
+  common_tags = {
+    Name = ""
+    Environment = "dev"
+    Owner       = "Lara"
+  }
+}
+
 resource "aws_lb_target_group" "target_group" {
-  name        = "lab-target-group"
+  name        = local.tg_name
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
 
-  tags = {
-    Name        = "Target Group"
-    Environment = var.environment
-    Owner       = "Lara"
-  }
+  tags = merge(local.common_tags, {
+    Name = "Target Group"
+  })
 }
 
 resource "aws_lb" "alb" {
-  name               = "lab-alb"
+  name               = local.alb_name
   internal           = false
   load_balancer_type = "application"
   security_groups    = var.security_group_ids
   subnets            = var.subnets_ids
 
-  tags = {
-    Name        = "ECR Repository Base de Datos"
-    Environment = var.environment
-    Owner       = "Lara"
-  }
+  tags = merge(local.common_tags, {
+    Name = "Application Load Balancer"
+  })
 }
 
 resource "aws_lb_listener" "listener_https" {
