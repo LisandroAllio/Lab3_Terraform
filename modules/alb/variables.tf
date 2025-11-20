@@ -1,11 +1,11 @@
 variable "vpc_id" {
-    description = "ID de la VPC para el ALB"
-    type = string
+  description = "ID de la VPC para el ALB"
+  type        = string
 }
 
 variable "subnets_ids" {
-    description = "Lista de IDs de las subnets para el ALB"
-    type = set(string)
+  description = "Lista de IDs de las subnets para el ALB"
+  type        = set(string)
 }
 
 variable "certificate_arn" {
@@ -19,5 +19,5 @@ variable "security_group_ids" {
 }
 
 variable "environment" {
-  default     = "dev"
+  default = "dev"
 }

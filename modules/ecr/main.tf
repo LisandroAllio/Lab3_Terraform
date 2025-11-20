@@ -1,6 +1,6 @@
 locals {
-  name_front        = "lab/front"
-  name_bd           = "lab/bd-mysql"
+  name_front = "lab/front"
+  name_bd    = "lab/bd-mysql"
 }
 
 resource "aws_ecr_repository" "repositorio_front" {
@@ -28,7 +28,7 @@ resource "aws_ecr_repository" "repositorio_bd" {
   encryption_configuration {
     encryption_type = var.encryption_type
   }
-  
+
   image_scanning_configuration {
     scan_on_push = var.scan_on_push
   }
