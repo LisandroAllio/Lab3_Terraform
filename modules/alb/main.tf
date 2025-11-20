@@ -2,7 +2,6 @@ locals {
   tg_name = "lab-target-group"
   alb_name = "lab-alb"
   common_tags = {
-    Name = ""
     Environment = "dev"
     Owner       = "Lara"
   }

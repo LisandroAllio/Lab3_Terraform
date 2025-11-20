@@ -1,6 +1,10 @@
 locals {
   name_front = "lab/front"
   name_bd    = "lab/bd-mysql"
+  common_tags = {
+    Environment = "dev"
+    Owner       = "Lara"
+  }
 }
 
 resource "aws_ecr_repository" "repositorio_front" {
@@ -14,11 +18,9 @@ resource "aws_ecr_repository" "repositorio_front" {
     scan_on_push = var.scan_on_push
   }
 
-  tags = {
-    Name        = "ECR Repository Frontend"
-    Environment = var.environment
-    Owner       = "Lara"
-  }
+  tags = merge(local.common_tags, {
+    Name = "ECR Repository Frontend"
+  })
 }
 
 resource "aws_ecr_repository" "repositorio_bd" {
@@ -33,9 +35,7 @@ resource "aws_ecr_repository" "repositorio_bd" {
     scan_on_push = var.scan_on_push
   }
 
-  tags = {
-    Name        = "ECR Repository Base de Datos"
-    Environment = var.environment
-    Owner       = "Lara"
-  }
+  tags = merge(local.common_tags, {
+    Name = "ECR Repository Base de Datos"
+  })
 }
