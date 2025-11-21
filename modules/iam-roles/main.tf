@@ -1,11 +1,11 @@
 # IAM Instance Profile for EC2 instances
 resource "aws_iam_instance_profile" "ecs_instance" {
-  name = "ecs-instance-profile"
+  name = var.instance_profile_name
   role = aws_iam_role.ecs_instance.name
 }
 
 resource "aws_iam_role" "ecs_instance" {
-  name = "ecs-instance-role"
+  name = var.instance_role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -19,6 +19,8 @@ resource "aws_iam_role" "ecs_instance" {
       }
     ]
   })
+
+  #tags = var.tags --> operation error IAM: CreateRole, user is not authorized to perform: iam:TagRole on resource
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_instance" {

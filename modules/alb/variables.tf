@@ -17,3 +17,7 @@ variable "security_group_ids" {
   description = "Lista de IDs de Security Group para el ALB"
   type        = list(string)
 }
+
+variable "environment" {
+  default = "dev"
+}
