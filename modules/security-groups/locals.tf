@@ -1,7 +1,7 @@
 locals {
   sg_names = {
     alb     = "${var.name_prefix}-alb-sg"
-    ecs     = "${var.name_prefix}-ecs-tasks-sg"
+    front     = "${var.name_prefix}-front-sg"
     mysql   = "${var.name_prefix}-mysql-sg"
     efs     = "${var.name_prefix}-mysql-efs-sg"
     cluster = "${var.name_prefix}-cluster-sg"
