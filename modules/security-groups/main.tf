@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb" {
-  name        = "${var.name_prefix}-alb-sg"
+  name        = local.sg_names.alb
   description = "Security group para el ALB"
   vpc_id      = var.vpc_id
 
@@ -27,18 +27,11 @@ resource "aws_security_group" "alb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-alb-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  tags = merge(local.base_tags, { Name = local.sg_names.alb })
 }
 
 resource "aws_security_group" "ecs_tasks" {
-  name        = "${var.name_prefix}-ecs-tasks-sg"
+  name        = local.sg_names.ecs
   description = "Security group para las ECS tasks frontend"
   vpc_id      = var.vpc_id
 
@@ -50,18 +43,11 @@ resource "aws_security_group" "ecs_tasks" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-ecs-tasks-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  tags = merge(local.base_tags, { Name = local.sg_names.ecs })
 }
 
 resource "aws_security_group" "mysql" {
-  name        = "${var.name_prefix}-mysql-sg"
+  name        = local.sg_names.mysql
   description = "Security group para la base de datos MySQL"
   vpc_id      = var.vpc_id
 
@@ -73,18 +59,11 @@ resource "aws_security_group" "mysql" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-mysql-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  tags = merge(local.base_tags, { Name = local.sg_names.mysql })
 }
 
 resource "aws_security_group" "mysql_efs" {
-  name        = "${var.name_prefix}-mysql-efs-sg"
+  name        = local.sg_names.efs
   description = "Security group para EFS asociado a MySQL"
   vpc_id      = var.vpc_id
 
@@ -96,18 +75,11 @@ resource "aws_security_group" "mysql_efs" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-mysql-efs-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  tags = merge(local.base_tags, { Name = local.sg_names.efs })
 }
 
 resource "aws_security_group" "cluster" {
-  name        = "${var.name_prefix}-cluster-sg"
+  name        = local.sg_names.cluster
   description = "Security group para las instancias del cluster ECS"
   vpc_id      = var.vpc_id
 
@@ -119,14 +91,7 @@ resource "aws_security_group" "cluster" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-cluster-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  tags = merge(local.base_tags, { Name = local.sg_names.cluster })
 }
 
 resource "aws_security_group_rule" "ecs_ingress_from_alb" {
@@ -137,16 +102,6 @@ resource "aws_security_group_rule" "ecs_ingress_from_alb" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.ecs_tasks.id
   source_security_group_id = aws_security_group.alb.id
-}
-
-resource "aws_security_group_rule" "ecs_egress_to_mysql" {
-  description       = "MySQL hacia el security group de la base de datos"
-  type              = "egress"
-  from_port         = 3306
-  to_port           = 3306
-  protocol          = "tcp"
-  security_group_id = aws_security_group.ecs_tasks.id
-  security_groups   = [aws_security_group.mysql.id]
 }
 
 resource "aws_security_group_rule" "mysql_ingress_from_ecs" {
