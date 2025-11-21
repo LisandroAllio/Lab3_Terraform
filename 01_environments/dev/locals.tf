@@ -1,19 +1,16 @@
 locals {
-  sg_names = {
-    alb     = "${var.name_prefix}-alb-sg"
-    ecs     = "${var.name_prefix}-ecs-tasks-sg"
-    mysql   = "${var.name_prefix}-mysql-sg"
-    efs     = "${var.name_prefix}-mysql-efs-sg"
-    cluster = "${var.name_prefix}-cluster-sg"
-  }
+  # VPC Configuration
+  vpc_cidr       = "10.0.0.0/16"
+  azs = ["us-east-1a", "us-east-1b"]
+  subnet_newbits = 9
 
-  base_tags = merge(
-    {
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  public_subnets = [
+    cidrsubnet(local.vpc_cidr, local.subnet_newbits, 0),
+    cidrsubnet(local.vpc_cidr, local.subnet_newbits, 1),
+  ]
+
+  private_subnets = [
+    cidrsubnet(local.vpc_cidr, local.subnet_newbits, 2),
+    cidrsubnet(local.vpc_cidr, local.subnet_newbits, 3),
+  ]
 }
-
-
