@@ -1,7 +1,13 @@
-variable "image_uri" {
+variable "image_uri_front" {
     description = "URI de la imagen del frontend en ECR"
     type = string
 }
+
+variable "image_uri_db" {
+    description = "URI de la imagen de la base de datos en ECR"
+    type = string
+}
+
 
 variable "cpu_units" {
     description = "Unidades de CPU que requiere la tarea"
@@ -13,8 +19,13 @@ variable "memory_limit" {
     type = string
 }
 
-variable "container_port" {
-    description = "Puerto expuesto por el contenedor"
+variable "container_port_front" {
+    description = "Puerto expuesto por el contenedor para el frontend"
+    type = number
+}
+
+variable "container_port_db" {
+    description = "Puerto expuesto por el contenedor para la base de datos"
     type = number
 }
 
