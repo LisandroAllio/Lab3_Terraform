@@ -5,7 +5,7 @@ module "ecs_frontend" {
 
   service_name        = "frontend-service"
   cluster_id          = module.ecs_cluster.cluster_id
-  task_definition_arn = "PLACEHOLDER_TASK_DEFINITION_ARN" # TODO: Reemplazar con module.ecs_task_frontend.task_definition_arn
+  task_definition_arn = module.ecs_tasks.task_definition_front_arn
   desired_count       = 2
 
   subnet_ids         = module.vpc.private_subnets
