@@ -45,11 +45,7 @@ resource "aws_iam_role" "ecs_task_execution" {
     ]
   })
 
-  tags = {
-    Name        = "ECS Task Execution Role"
-    Environment = "dev"
-    Owner       = "federico"
-  }
+  # tags removed due to IAM tagging restrictions
 }
 
 # Attach the default ECS Task Execution policy (for ECR, CloudWatch Logs)
@@ -89,11 +85,7 @@ resource "aws_iam_policy" "parameter_store_read" {
       }
     ]
   })
-  tags = {
-    Name        = "ECS Parameter Store Access Role"
-    Environment = "dev"
-    Owner       = "federico"
-  }
+  # tags removed due to IAM tagging restrictions
 }
 
 # Attach Parameter Store policy to the execution role
