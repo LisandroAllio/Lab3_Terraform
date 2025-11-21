@@ -1,7 +1,7 @@
 locals {
   # VPC Configuration
   vpc_cidr       = "10.0.0.0/16"
-  azs = ["us-east-1a", "us-east-1b"]
+  azs            = ["us-east-1a", "us-east-1b"]
   subnet_newbits = 9
 
   public_subnets = [

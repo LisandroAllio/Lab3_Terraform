@@ -1,3 +1,4 @@
+# ALB Security Group
 resource "aws_security_group" "alb" {
   name        = local.sg_names.alb
   description = "Security group para el ALB"
@@ -30,7 +31,7 @@ resource "aws_security_group" "alb" {
   tags = merge(local.base_tags, { Name = local.sg_names.alb })
 }
 
-<<<<<<< HEAD
+# ECS Tasks Security Group (Frontend)
 resource "aws_security_group" "ecs_tasks" {
   name        = local.sg_names.ecs
   description = "Security group para las ECS tasks frontend"
@@ -47,6 +48,7 @@ resource "aws_security_group" "ecs_tasks" {
   tags = merge(local.base_tags, { Name = local.sg_names.ecs })
 }
 
+# MySQL Security Group
 resource "aws_security_group" "mysql" {
   name        = local.sg_names.mysql
   description = "Security group para la base de datos MySQL"
@@ -63,6 +65,7 @@ resource "aws_security_group" "mysql" {
   tags = merge(local.base_tags, { Name = local.sg_names.mysql })
 }
 
+# EFS Security Group
 resource "aws_security_group" "mysql_efs" {
   name        = local.sg_names.efs
   description = "Security group para EFS asociado a MySQL"
@@ -79,9 +82,7 @@ resource "aws_security_group" "mysql_efs" {
   tags = merge(local.base_tags, { Name = local.sg_names.efs })
 }
 
-=======
-# Cluster - Solo ALB puede conectarse
->>>>>>> dev
+# Cluster Security Group
 resource "aws_security_group" "cluster" {
   name        = local.sg_names.cluster
   description = "Security group para las instancias del cluster ECS"
@@ -98,33 +99,20 @@ resource "aws_security_group" "cluster" {
   tags = merge(local.base_tags, { Name = local.sg_names.cluster })
 }
 
+# SECURITY GROUP RULES
 
-# Frontend Tasks - Solo ALB puede conectarse
-resource "aws_security_group" "task_front" {
-  name        = "${var.name_prefix}-front-sg"
-  description = "Security group para las ECS tasks frontend"
-  vpc_id      = var.vpc_id
-
-  # Outbound: All traffic
-  egress {
-    description = "Salida total"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-front-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+# ECS Tasks - Ingress from ALB
+resource "aws_security_group_rule" "ecs_ingress_from_alb" {
+  description              = "HTTP desde el ALB hacia las ECS tasks"
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.ecs_tasks.id
+  source_security_group_id = aws_security_group.alb.id
 }
 
-<<<<<<< HEAD
+# MySQL - Ingress from ECS Tasks
 resource "aws_security_group_rule" "mysql_ingress_from_ecs" {
   description              = "Acceso MySQL desde las ECS tasks"
   type                     = "ingress"
@@ -135,6 +123,7 @@ resource "aws_security_group_rule" "mysql_ingress_from_ecs" {
   source_security_group_id = aws_security_group.ecs_tasks.id
 }
 
+# EFS - Ingress from MySQL
 resource "aws_security_group_rule" "efs_ingress_from_mysql" {
   description              = "EFS permite tráfico NFS desde MySQL"
   type                     = "ingress"
@@ -143,41 +132,9 @@ resource "aws_security_group_rule" "efs_ingress_from_mysql" {
   protocol                 = "tcp"
   security_group_id        = aws_security_group.mysql_efs.id
   source_security_group_id = aws_security_group.mysql.id
-=======
-# MySQL Tasks - Solo frontend y EFS pueden comunicarse
-resource "aws_security_group" "task_mysql" {
-  name        = "${var.name_prefix}-mysql-sg"
-  description = "Security group para la base de datos MySQL"
-  vpc_id      = var.vpc_id
-
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-mysql-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
 }
 
-# EFS - Solo la base de datos puede comunicarse
-resource "aws_security_group" "efs" {
-  name        = "${var.name_prefix}-efs-sg"
-  description = "Security group para EFS asociado a MySQL"
-  vpc_id      = var.vpc_id
-
-  tags = merge(
-    {
-      Name        = "${var.name_prefix}-efs-sg"
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
->>>>>>> dev
-}
-
-# CLUSTER RULES
+# Cluster - Ingress HTTP from ALB
 resource "aws_security_group_rule" "cluster_ingress_http_from_alb" {
   description              = "HTTP desde el ALB hacia las instancias del cluster"
   type                     = "ingress"
@@ -188,6 +145,7 @@ resource "aws_security_group_rule" "cluster_ingress_http_from_alb" {
   source_security_group_id = aws_security_group.alb.id
 }
 
+# Cluster - Ingress HTTPS from ALB
 resource "aws_security_group_rule" "cluster_ingress_https_from_alb" {
   description              = "HTTPS desde el ALB hacia las instancias del cluster"
   type                     = "ingress"
@@ -197,64 +155,3 @@ resource "aws_security_group_rule" "cluster_ingress_https_from_alb" {
   security_group_id        = aws_security_group.cluster.id
   source_security_group_id = aws_security_group.alb.id
 }
-
-# FRONTEND RULES
-# Inbound: HTTP (80) desde SG del ALB
-resource "aws_security_group_rule" "front_ingress_from_alb" {
-  description              = "HTTP desde el ALB hacia las ECS tasks frontend"
-  type                     = "ingress"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.task_front.id
-  source_security_group_id = aws_security_group.alb.id
-}
-
-# Outbound: MySQL (3306) al SG del MSQL
-resource "aws_security_group_rule" "mysql_egress_to_front" {
-  description              = "frontend hacia las MySQL"
-  type                     = "egress"
-  from_port                = 3306
-  to_port                  = 3306
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.task_front.id
-  source_security_group_id = aws_security_group.task_mysql.id
-}
-
-# MYSQL RULES
-# Inbound: MySQL (3306) desde SG del Frontend
-resource "aws_security_group_rule" "mysql_ingress_from_front" {
-  description              = "MySQL desde las ECS tasks frontend"
-  type                     = "ingress"
-  from_port                = 3306
-  to_port                  = 3306
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.task_mysql.id
-  source_security_group_id = aws_security_group.task_front.id
-}
-
-# Outbound: NFS (2049) hacia SG de la EFS
-resource "aws_security_group_rule" "mysql_egress_to_efs" {
-  description              = "NFS hacia EFS desde MySQL"
-  type                     = "egress"
-  from_port                = 2049
-  to_port                  = 2049
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.task_mysql.id
-  source_security_group_id = aws_security_group.efs.id
-}
-
-# EFS RULES
-# Inbound: NFS (2049) desde SG de la BD
-resource "aws_security_group_rule" "efs_ingress_from_mysql" {
-  description              = "NFS desde MySQL hacia EFS"
-  type                     = "ingress"
-  from_port                = 2049
-  to_port                  = 2049
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.efs.id
-  source_security_group_id = aws_security_group.task_mysql.id
-}
-
-
-

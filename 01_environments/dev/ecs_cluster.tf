@@ -4,7 +4,7 @@ module "ecs_cluster" {
 
   cluster_name           = "my-ecs-cluster"
   capacity_provider_name = "my-capacity-provider"
-  asg_arn               = module.ecs_asg.asg_arn
+  asg_arn                = module.ecs_asg.asg_arn
 
   tags = {
     Name        = "My ECS Cluster"
