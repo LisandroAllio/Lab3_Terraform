@@ -12,7 +12,7 @@ module "ecs_asg" {
   instance_type              = "t2.micro"
   iam_instance_profile_arn   = module.iam_roles.instance_profile_arn
   security_group_ids         = [module.security_groups.cluster_security_group_id]
-  cluster_name               = "my-ecs-cluster"
+  cluster_name               = "lab3-cluster"
 
   tags = {
     Name        = "ECS Launch Template"

@@ -1,5 +1,5 @@
 locals {
-  tg_name = "lab-target-group"
+  tg_name  = "lab-target-group"
   alb_name = "lab-alb"
   common_tags = {
     Environment = "dev"
@@ -32,7 +32,7 @@ resource "aws_lb" "alb" {
     Environment = var.environment
   })
 }
-/*
+
 resource "aws_lb_listener" "listener_https" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "443"
@@ -58,17 +58,5 @@ resource "aws_lb_listener" "listener_http" {
       protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
-  }
-}
-*/
-
-resource "aws_lb_listener" "listener_http" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target_group.arn
   }
 }
