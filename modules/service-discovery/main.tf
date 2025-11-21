@@ -20,9 +20,7 @@ resource "aws_service_discovery_service" "service_discovery_service" {
     routing_policy = var.routing_policy
   }
 
-  health_check_config {
-    failure_threshold = var.failure_threshold
-  }
+
 
   tags = var.tags
 }

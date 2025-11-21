@@ -42,6 +42,12 @@ variable "failure_threshold" {
   default     = 1
 }
 
+variable "health_check_type" {
+  description = "Type of health check"
+  type        = string
+  default     = "HTTP"
+}
+
 variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)

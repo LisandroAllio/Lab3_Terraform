@@ -20,7 +20,7 @@ resource "aws_iam_role" "ecs_instance" {
     ]
   })
 
-  tags = var.tags
+  #tags = var.tags --> operation error IAM: CreateRole, user is not authorized to perform: iam:TagRole on resource
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_instance" {
