@@ -27,7 +27,3 @@ variable "task_role_arn" {
     description = "El ARN del rol de la tarea"
     type = string
 }
-
-//variable "execution_role_arn" {
- //   description = "El ARN del rol de ejecución para ECS"
-//}
