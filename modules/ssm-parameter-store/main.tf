@@ -5,6 +5,6 @@ resource "aws_ssm_parameter" "parameter_front_host" {
 }
 
 resource "aws_ssm_parameter" "parameter_bd_..." {
-  name = ""
-  type = ""
+    name = ""
+    type = ""
 }
