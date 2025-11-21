@@ -1,5 +1,5 @@
 #### ECS Service - Frontend ####
-/*
+
 module "ecs_frontend" {
   source = "../../modules/ecs-frontend"
 
@@ -25,5 +25,5 @@ module "ecs_frontend" {
     Owner       = "Ezequiel"
   }
 }
-*/
+
 
