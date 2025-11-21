@@ -12,3 +12,7 @@ variable "scan_on_push" {
   description = "Indica si la imagen va a escanearse al pushearla"
   type        = bool
 }
+
+variable "environment" {
+  default = "dev"
+}
