@@ -43,3 +43,13 @@ variable "execution_role_arn" {
     description = "El ARN del rol de ejecución para ECS"
     type = string
 }
+
+variable "efs_file_system_id" {
+    description = "ID del sistema de archivos EFS"
+    type = string
+}
+
+variable "efs_access_point_id" {
+    description = "ID del access point de EFS"
+    type = string
+}

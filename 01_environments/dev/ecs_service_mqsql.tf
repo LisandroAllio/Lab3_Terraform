@@ -4,7 +4,7 @@ module "ecs_mysql" {
 
   service_name        = "mysql-service"
   cluster_id          = module.ecs_cluster.cluster_id
-  task_definition_arn = "db-task:1"
+  task_definition_arn = module.ecs_tasks.task_definition_db_arn
   desired_count       = 1
   launch_type         = "EC2"
 
