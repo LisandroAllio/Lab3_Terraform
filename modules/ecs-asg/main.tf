@@ -16,20 +16,25 @@ resource "aws_autoscaling_group" "ecs" {
     value               = true
     propagate_at_launch = true
   }
-
   tag {
     key                 = "Name"
     value               = var.instance_name
     propagate_at_launch = true
   }
-
-  dynamic "tag" {
-    for_each = var.tags
-    content {
-      key                 = tag.key
-      value               = tag.value
-      propagate_at_launch = true
-    }
+  tag {
+    key                 = "Cluster"
+    value               = var.cluster_name
+    propagate_at_launch = true
+  }
+  tag {
+    key                 = "Environment"
+    value               = var.tags.Environment
+    propagate_at_launch = true
+  }
+  tag {
+    key                 = "Owner"
+    value               = var.tags.Owner
+    propagate_at_launch = true
   }
 }
 
