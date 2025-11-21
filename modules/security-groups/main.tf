@@ -119,7 +119,7 @@ resource "aws_security_group" "efs" {
   )
 }
 
-# ALB RULES
+# CLUSTER RULES
 resource "aws_security_group_rule" "cluster_ingress_http_from_alb" {
   description              = "HTTP desde el ALB hacia las instancias del cluster"
   type                     = "ingress"
@@ -152,22 +152,22 @@ resource "aws_security_group_rule" "front_ingress_from_alb" {
   source_security_group_id = aws_security_group.alb.id
 }
 
+# Outbound: MySQL (3306) al SG del MSQL
+resource "aws_security_group_rule" "mysql_egress_to_front" {
+  description              = "frontend hacia las MySQL"
+  type                     = "egress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.task_front.id
+  source_security_group_id = aws_security_group.task_mysql.id
+}
+
 # MYSQL RULES
 # Inbound: MySQL (3306) desde SG del Frontend
 resource "aws_security_group_rule" "mysql_ingress_from_front" {
   description              = "MySQL desde las ECS tasks frontend"
   type                     = "ingress"
-  from_port                = 3306
-  to_port                  = 3306
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.task_mysql.id
-  source_security_group_id = aws_security_group.task_front.id
-}
-
-# Outbound: MySQL (3306) hacia SG del Frontend
-resource "aws_security_group_rule" "mysql_egress_to_front" {
-  description              = "MySQL hacia las ECS tasks frontend"
-  type                     = "egress"
   from_port                = 3306
   to_port                  = 3306
   protocol                 = "tcp"
@@ -191,17 +191,6 @@ resource "aws_security_group_rule" "mysql_egress_to_efs" {
 resource "aws_security_group_rule" "efs_ingress_from_mysql" {
   description              = "NFS desde MySQL hacia EFS"
   type                     = "ingress"
-  from_port                = 2049
-  to_port                  = 2049
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.efs.id
-  source_security_group_id = aws_security_group.task_mysql.id
-}
-
-# Outbound: hacia SG de la BD
-resource "aws_security_group_rule" "efs_egress_to_mysql" {
-  description              = "EFS hacia MySQL"
-  type                     = "egress"
   from_port                = 2049
   to_port                  = 2049
   protocol                 = "tcp"
