@@ -1,5 +1,5 @@
 locals {
-  tg_name = "lab-target-group"
+  tg_name  = "lab-target-group"
   alb_name = "lab-alb"
   common_tags = {
     Environment = "dev"

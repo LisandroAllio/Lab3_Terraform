@@ -5,4 +5,7 @@ module "security_groups" {
   vpc_id      = module.vpc.vpc_id
   name_prefix = "lab-3"
   environment = "dev"
+  tags = {
+    Owner = "Ezequiel"
+  }
 }

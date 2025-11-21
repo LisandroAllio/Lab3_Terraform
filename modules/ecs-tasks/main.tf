@@ -1,7 +1,7 @@
 resource "aws_ecs_task_definition" "task_definition_front" {
-  family = "front_task_def"
-  network_mode = "awsvpc"
-  task_role_arn = "" #Agregar
+  family             = "front_task_def"
+  network_mode       = "awsvpc"
+  task_role_arn      = "" #Agregar
   execution_role_arn = "" #Agregar
   container_definitions = jsonencode([
     {
@@ -16,8 +16,8 @@ resource "aws_ecs_task_definition" "task_definition_front" {
           hostPort      = 80
         }
       ]
-      environment =[
-        {name = "DB_HOST", value = "..."}
+      environment = [
+        { name = "DB_HOST", value = "..." }
       ]
     }
   ])

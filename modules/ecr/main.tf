@@ -19,7 +19,7 @@ resource "aws_ecr_repository" "repositorio_front" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "ECR Repository Frontend"
+    Name        = "ECR Repository Frontend"
     Environment = var.environment
   })
 
@@ -38,7 +38,7 @@ resource "aws_ecr_repository" "repositorio_bd" {
   }
 
   tags = merge(local.common_tags, {
-    Name = "ECR Repository Base de Datos"
+    Name        = "ECR Repository Base de Datos"
     Environment = var.environment
   })
 }

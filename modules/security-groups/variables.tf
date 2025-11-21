@@ -6,7 +6,7 @@ variable "vpc_id" {
 variable "name_prefix" {
   description = "Prefijo para nombrar los security groups"
   type        = string
-  default     = "php-sample"
+  default     = "lab-3"
 }
 
 variable "environment" {
