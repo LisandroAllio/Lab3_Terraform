@@ -140,13 +140,13 @@ resource "aws_security_group_rule" "ecs_ingress_from_alb" {
 }
 
 resource "aws_security_group_rule" "ecs_egress_to_mysql" {
-  description       = "MySQL hacia el security group de la base de datos"
-  type              = "egress"
-  from_port         = 3306
-  to_port           = 3306
-  protocol          = "tcp"
-  security_group_id = aws_security_group.ecs_tasks.id
-  security_groups   = [aws_security_group.mysql.id]
+  description              = "MySQL hacia el security group de la base de datos"
+  type                     = "egress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.ecs_tasks.id
+  source_security_group_id = aws_security_group.mysql.id
 }
 
 resource "aws_security_group_rule" "mysql_ingress_from_ecs" {
@@ -160,7 +160,7 @@ resource "aws_security_group_rule" "mysql_ingress_from_ecs" {
 }
 
 resource "aws_security_group_rule" "efs_ingress_from_mysql" {
-  description              = "EFS permite tráfico NFS desde MySQL"
+  description              = "EFS permite trafico NFS desde MySQL"
   type                     = "ingress"
   from_port                = 2049
   to_port                  = 2049
