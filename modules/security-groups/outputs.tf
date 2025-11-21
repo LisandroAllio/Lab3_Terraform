@@ -5,7 +5,7 @@ output "alb_security_group_id" {
 
 output "ecs_tasks_security_group_id" {
   description = "Security group ID para las ECS tasks del frontend"
-  value       = aws_security_group.ecs_tasks.id
+  value       = aws_security_group.front.id
 }
 
 output "mysql_security_group_id" {
