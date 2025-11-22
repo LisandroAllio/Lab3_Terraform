@@ -35,6 +35,14 @@ resource "aws_ecs_task_definition" "task_definition_front" {
         }
       ]
       secrets = [{ name = "DB_HOST", valueFrom = "arn:aws:ssm:${local.region_id}:${local.account_id}:parameter${var.db_host_name}"}]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group"         = var.frontend_log_group_name
+          "awslogs-region"        = var.aws_region
+          "awslogs-stream-prefix" = "ecs"
+        }
+      }
     }
   ])
   tags = merge(local.common_tags, {
@@ -82,6 +90,14 @@ resource "aws_ecs_task_definition" "task_definition_db" {
           readOnly      = false
         }
       ]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          "awslogs-group"         = var.mysql_log_group_name
+          "awslogs-region"        = var.aws_region
+          "awslogs-stream-prefix" = "ecs"
+        }
+      }
     }
   ])
 
