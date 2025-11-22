@@ -19,6 +19,10 @@ resource "aws_ecs_task_definition" "task_definition_front" {
   memory                = var.memory_limit
   task_role_arn         = var.task_role_arn
   execution_role_arn    = var.execution_role_arn
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture = "X86_64"
+  }
   container_definitions = jsonencode([
     {
       name         = "frontend"
@@ -30,7 +34,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
           hostPort      = var.container_port_front
         }
       ]
-      secrets = [{ name = "DB_HOST", valueFrom = "arn:aws:ssm:${local.region_id}:${local.account_id}:parameter/${var.db_host_name}"}]
+      secrets = [{ name = "DB_HOST", valueFrom = "arn:aws:ssm:${local.region_id}:${local.account_id}:parameter${var.db_host_name}"}]
     }
   ])
   tags = merge(local.common_tags, {
@@ -45,8 +49,12 @@ resource "aws_ecs_task_definition" "task_definition_db" {
   memory                = var.memory_limit
   task_role_arn         = var.task_role_arn
   execution_role_arn    = var.execution_role_arn
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture = "X86_64"
+  }
   volume {
-    name = "efs-data-volume"
+    name = "lab-3-mysql-efs"
 
     efs_volume_configuration {
       file_system_id          = var.efs_file_system_id
@@ -69,7 +77,7 @@ resource "aws_ecs_task_definition" "task_definition_db" {
       ]
       mountPoints = [
         {
-          sourceVolume  = "efs-data-volume" 
+          sourceVolume  = "lab-3-mysql-efs" 
           containerPath = "/var/lib/mysql"       
           readOnly      = false
         }
