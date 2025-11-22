@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
   container_definitions = jsonencode([
     {
       name         = "frontend"
-      image        = var.image_uri_db
+      image        = var.image_uri_front
       essential    = true
       portMappings = [
         {
