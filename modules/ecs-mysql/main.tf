@@ -14,12 +14,14 @@ resource "aws_ecs_service" "service" {
     assign_public_ip = false
   }
 
-  dynamic "ordered_placement_strategy" {
-    for_each = var.placement_strategies
-    content {
-      type  = ordered_placement_strategy.value.type
-      field = ordered_placement_strategy.value.field
-    }
+  # Deployment configuration para distribuir las tasks según requerimientos
+  #Deployment strategy = Rolling update (por default)
+  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = 100
+
+
+  service_registries {
+    registry_arn = var.service_discovery_arn
   }
 
   tags = var.tags

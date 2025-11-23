@@ -11,9 +11,12 @@ module "ecs_mysql" {
   subnet_ids         = module.vpc.private_subnets
   security_group_ids = [module.security_groups.mysql_security_group_id]
 
+  service_discovery_arn = module.service_discovery.service_arn
+
   tags = {
     Name        = "MySQL Service"
     Environment = "dev"
     Owner       = "lisandro"
   }
+
 }
