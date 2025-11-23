@@ -21,6 +21,11 @@ resource "aws_ecs_service" "frontend" {
     container_port   = var.container_port
   }
 
+  # Deployment configuration para distribuir las tasks según requerimientos
+  #Deployment strategy = Rolling update (por default)
+  deployment_minimum_healthy_percent = 0
+  deployment_maximum_percent         = 100
+
   # Placement strategies para distribuir las tasks según requerimientos
   ordered_placement_strategy {
     type  = "spread"

@@ -35,13 +35,9 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "placement_strategies" {
-  description = "List of placement strategies"
-  type = list(object({
-    type  = string
-    field = string
-  }))
-  default = []
+variable service_discovery_arn {
+  description = "ARN of the service discovery"
+  type        = string
 }
 
 variable "tags" {
