@@ -14,6 +14,11 @@ resource "aws_lb_target_group" "target_group" {
   target_type = "ip"
   vpc_id      = var.vpc_id
 
+  health_check {
+    enabled = true
+    path = "/css/twitter.css"
+  }
+
   tags = merge(local.common_tags, {
     Name        = "Target Group"
     Environment = var.environment
