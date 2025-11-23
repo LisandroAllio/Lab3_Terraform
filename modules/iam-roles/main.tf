@@ -79,9 +79,9 @@ resource "aws_iam_policy" "parameter_store_read" {
   name        = var.parameter_store_role_name     #"ecs-parameter-store-read"
   description = "Allow ECS tasks to read from Parameter Store (and SecureString)"
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 
   policy = jsonencode({
     Version = "2012-10-17"

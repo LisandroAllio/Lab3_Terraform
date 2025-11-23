@@ -8,6 +8,7 @@ locals {
 }
 
 resource "aws_ecr_repository" "repositorio_front" {
+  force_delete = true
   name                 = local.name_front
   image_tag_mutability = var.image_tag_mutability
   encryption_configuration {
@@ -26,6 +27,7 @@ resource "aws_ecr_repository" "repositorio_front" {
 }
 
 resource "aws_ecr_repository" "repositorio_bd" {
+  force_delete = true
   name                 = local.name_bd
   image_tag_mutability = var.image_tag_mutability
 
