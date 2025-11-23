@@ -13,11 +13,12 @@ locals {
 }
 
 resource "aws_ecs_task_definition" "task_definition_front" {
+  depends_on = [ module.parameter_store ] #To wait for parameter creation
+
   family                = "front_task_def"
   network_mode          = "awsvpc"
   cpu                   = var.cpu_units
   memory                = var.memory_limit
-  task_role_arn         = var.task_role_arn
   execution_role_arn    = var.execution_role_arn
   runtime_platform {
     operating_system_family = "LINUX"
@@ -34,7 +35,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
           hostPort      = var.container_port_front
         }
       ]
-      secrets = [{ name = "DB_HOST", valueFrom = "arn:aws:ssm:${local.region_id}:${local.account_id}:parameter${var.db_host_name}"}]
+      secrets = [{ name = "DB_HOST", valueFrom = var.db_host_name}]
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -55,7 +56,6 @@ resource "aws_ecs_task_definition" "task_definition_db" {
   network_mode          = "awsvpc"
   cpu                   = var.cpu_units
   memory                = var.memory_limit
-  task_role_arn         = var.task_role_arn
   execution_role_arn    = var.execution_role_arn
   runtime_platform {
     operating_system_family = "LINUX"

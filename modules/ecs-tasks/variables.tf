@@ -33,11 +33,11 @@ variable "db_host_name" {
   description = "Nombre del parametro dentro de Parameter Store"
   type        = string
 }
-
-variable "task_role_arn" {
-  description = "El ARN del rol de la tarea"
-  type        = string
-}
+# NO SE USA
+# variable "task_role_arn" {
+#   description = "El ARN del rol de la tarea"
+#   type        = string
+# }
 
 variable "execution_role_arn" {
   description = "El ARN del rol de ejecución para ECS"
