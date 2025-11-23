@@ -6,6 +6,8 @@ resource "aws_ecs_service" "service" {
   desired_count   = var.desired_count
   launch_type     = var.launch_type
 
+  force_delete = true  # Forces deletion even if tasks are running
+
   network_configuration {
     subnets          = var.subnet_ids
     security_groups  = var.security_group_ids
