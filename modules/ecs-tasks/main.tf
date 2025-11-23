@@ -13,7 +13,6 @@ locals {
 }
 
 resource "aws_ecs_task_definition" "task_definition_front" {
-  depends_on = [ module.parameter_store ] #To wait for parameter creation
 
   family                = "front_task_def"
   network_mode          = "awsvpc"
