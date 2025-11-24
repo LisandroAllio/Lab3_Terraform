@@ -66,6 +66,14 @@ resource "aws_iam_role_policy" "codebuild" {
           "ecr:CompleteLayerUpload"
         ]
         Resource = "arn:aws:ecr:us-east-1:979244568430:repository/*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameter",
+          "ssm:GetParameters"
+        ]
+        Resource = "arn:aws:ssm:us-east-1:979244568430:parameter/lab/*"
       }
     ]
   })
@@ -83,14 +91,33 @@ resource "aws_codebuild_project" "frontend" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+    image                       = "aws/codebuild/standard:6.0"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
     privileged_mode             = true  # Required for Docker builds
 
     environment_variable {
-      name  = "ENV"
-      value = "dev"
+      name  = "AWS_DEFAULT_REGION"
+      type  = "PARAMETER_STORE"
+      value = "/lab/AWS_DEFAULT_REGION"
+    }
+
+    environment_variable {
+      name  = "AWS_ACCOUNT_ID"
+      type  = "PARAMETER_STORE"
+      value = "/lab/AWS_ACCOUNT_ID"
+    }
+
+    environment_variable {
+      name  = "IMAGE_REPO_NAME"
+      type  = "PARAMETER_STORE"
+      value = "/lab/IMAGE_REPO_NAME"
+    }
+
+    environment_variable {
+      name  = "CONTAINER_NAME"
+      type  = "PARAMETER_STORE"
+      value = "/lab/CONTAINER_NAME"
     }
   }
 
@@ -98,7 +125,7 @@ resource "aws_codebuild_project" "frontend" {
     type            = "GITHUB"
     location        = "https://github.com/federicogfb/teralab2.git"
     git_clone_depth = 1
-    buildspec       = "buildspec.yml"  # Or inline with buildspec = <<-EOF ... EOF
+    buildspec       = "buildspec.yml"  
   }
 
   tags = {
