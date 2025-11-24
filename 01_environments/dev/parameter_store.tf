@@ -39,7 +39,7 @@ module "parameter_store_image_repo" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
   name  = "/lab/IMAGE_REPO_NAME"
-  value = "lab-front-repo"
+  value = "lab/front"
   tags  = {
     Name        = "Parameter Store"
     Environment = "dev"

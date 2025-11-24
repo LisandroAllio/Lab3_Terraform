@@ -1,17 +1,7 @@
-
-### CONEXION GITHUB ###
-import {
-  to = aws_codestarconnections_connection.git_connection
-  identity = {
-    "arn" = "arn:aws:codeconnections:${var.aws_region}:${var.aws_account_id}:connection/4559c724-bd4c-4af9-929b-8d1448d57c7b"
-  }
-} #Traje la conexión que Eze ya tenia creada, es más practico que andar haciendo una nueva.
-
 resource "aws_codestarconnections_connection" "git_connection" {
     name = "github-conn-eze-final"
     provider_type = "GitHub"
 }
-
 
 ### BUCKET S3 ###
 resource "aws_s3_bucket" "codepipeline_bucket" {
@@ -140,7 +130,7 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
 ### PIPELINE STAGES ###
 resource "aws_codepipeline" "codepipeline" {
     name           = "lab-front-pipeline"
-    pipeline_type  = "V1"
+    pipeline_type  = "V2"
     execution_mode = "QUEUED"
     role_arn       = aws_iam_role.codepipeline_role.arn
     artifact_store {

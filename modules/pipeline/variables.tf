@@ -17,13 +17,13 @@ variable "repository_id" {
 variable "ecs_cluster_name" {
   description = "Name of the ECS cluster for deployment"
   type        = string
-  default     = "lab-cluster"
+  default     = "lab3-cluster"
 }
 
 variable "ecs_service_name" {
   description = "Name of the ECS service for deployment"
   type        = string
-  default     = "front-task-service"
+  default     = "frontend-service"
 }
 
 variable "aws_region" {
