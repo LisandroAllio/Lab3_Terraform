@@ -37,3 +37,9 @@ variable "aws_account_id" {
   type        = string
   default     = "979244568430"
 }
+
+variable "codepipeline_role_name" {
+  description = "Name for the role that CodePipeline will use"
+  type = string
+  default = "lab-front-pipeline-role"
+}
