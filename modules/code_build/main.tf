@@ -15,11 +15,6 @@ resource "aws_iam_role" "codebuild" {
     ]
   })
 
-  tags = {
-    Name        = "CodeBuild Role"
-    Environment = "dev"
-    Owner       = "federico"
-  }
 }
 
 # Basic permissions for CodeBuild
