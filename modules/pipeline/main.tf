@@ -20,7 +20,7 @@ resource "aws_s3_bucket_public_access_block" "codepipeline_bucket_pab" {
 
 ### ROLES PIPELINE ###
 resource "aws_iam_role" "codepipeline_role" {
-  name = "lab-front-pipeline-role"
+  name = var.codepipeline_role_name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

@@ -14,7 +14,7 @@ module "codebuild_project" {
 module "codepipeline" {
   source = "../../modules/pipeline"
   codebuild_project_name = module.codebuild_project.codebuild_project_name
-  codepipeline_role_name = "lab-front-pipeline-role"
+  # codepipeline_role_name = "lab-front-pipeline-role" // this is the default value
   s3_bucket_name = "lab3-pipeline-bucket"
   aws_region = "us-east-1"
   aws_account_id = "979244568430"
