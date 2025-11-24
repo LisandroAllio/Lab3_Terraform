@@ -51,7 +51,7 @@ module "parameter_store_container" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
   name  = "/lab/CONTAINER_NAME"
-  value = "php-container"
+  value = "frontend"
   tags  = {
     Name        = "Parameter Store"
     Environment = "dev"
