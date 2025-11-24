@@ -40,16 +40,22 @@ data "aws_iam_policy_document" "codepipeline_policy" {
   statement {
     effect = "Allow"
     actions = [
-      "s3:GetObject",
-      "s3:GetObjectVersion",
-      "s3:GetBucketVersioning",
       "s3:PutObjectAcl",
-      "s3:PutObject"
+      "s3:PutObject",
+      "s3:GetObjectVersion",
+      "s3:GetObject",
+      "s3:GetBucketVersioning"
     ]
     resources = [
       aws_s3_bucket.codepipeline_bucket.arn,
       "${aws_s3_bucket.codepipeline_bucket.arn}/*"
     ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = ["sts:AssumeRole"]
+    resources = ["arn:aws:iam::${var.aws_account_id}:role/codepipeline-ecs-deploy-role"]
   }
 
   statement {
@@ -61,8 +67,8 @@ data "aws_iam_policy_document" "codepipeline_policy" {
   statement {
     effect = "Allow"
     actions = [
-      "codebuild:BatchGetBuilds",
-      "codebuild:StartBuild"
+      "codebuild:StartBuild",
+      "codebuild:BatchGetBuilds"
     ]
     resources = ["arn:aws:codebuild:${var.aws_region}:${var.aws_account_id}:project/*"]
   }
@@ -71,21 +77,48 @@ data "aws_iam_policy_document" "codepipeline_policy" {
     effect = "Allow"
     actions = [
       "ecs:UpdateService",
-      "ecs:DescribeServices"
+      "ecs:DescribeServices",
+      "ecs:DescribeClusters",
+      "ecs:CreateService",
+      "ecs:ListTasks",
+      "ecs:DescribeTasks",
+      "ecs:ListServices",
+      "ecs:RegisterTaskDefinition",
+      "ecs:DescribeTaskDefinition",
+      "ecs:ListTaskDefinitions",
+      "ecs:DeregisterTaskDefinition",
+      "ecs:TagResource"
     ]
-    resources = [
-      "arn:aws:ecs:${var.aws_region}:${var.aws_account_id}:cluster/${var.ecs_cluster_name}",
-      "arn:aws:ecs:${var.aws_region}:${var.aws_account_id}:service/${var.ecs_cluster_name}/*"
-    ]
+    resources = ["*"]
   }
 
   statement {
     effect = "Allow"
     actions = [
-      "ecs:DescribeTaskDefinition",
-      "ecs:RegisterTaskDefinition"
+      "servicediscovery:CreateService",
+      "servicediscovery:GetService",
+      "servicediscovery:UpdateService",
+      "servicediscovery:DeleteService",
+      "servicediscovery:RegisterInstance",
+      "servicediscovery:DeregisterInstance",
+      "servicediscovery:DiscoverInstances",
+      "servicediscovery:GetInstancesHealthStatus",
+      "servicediscovery:ListServices",
+      "servicediscovery:ListInstances"
     ]
-    resources = ["arn:aws:ecs:${var.aws_region}:${var.aws_account_id}:task-definition/*"]
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "route53:GetHostedZone",
+      "route53:ListHostedZonesByName",
+      "route53:CreateHostedZone",
+      "route53:ChangeResourceRecordSets",
+      "route53:GetChange"
+    ]
+    resources = ["*"]
   }
 
   statement {
@@ -97,9 +130,9 @@ data "aws_iam_policy_document" "codepipeline_policy" {
   statement {
     effect = "Allow"
     actions = [
-      "ecr:BatchCheckLayerAvailability",
       "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage"
+      "ecr:BatchGetImage",
+      "ecr:BatchCheckLayerAvailability"
     ]
     resources = ["arn:aws:ecr:${var.aws_region}:${var.aws_account_id}:repository/*"]
   }
@@ -113,11 +146,25 @@ data "aws_iam_policy_document" "codepipeline_policy" {
   statement {
     effect = "Allow"
     actions = [
-      "logs:CreateLogGroup",
+      "logs:PutLogEvents",
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:CreateLogGroup"
     ]
     resources = ["arn:aws:logs:${var.aws_region}:${var.aws_account_id}:*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = ["iam:PassRole"]
+    resources = ["*"]
+    condition {
+      test     = "StringLike"
+      variable = "iam:PassedToService"
+      values = [
+        "ecs-tasks.amazonaws.com",
+        "ecs.amazonaws.com"
+      ]
+    }
   }
 }
 
