@@ -20,6 +20,6 @@ module "codepipeline" {
   aws_account_id = "979244568430"
   ecs_cluster_name = "lab3-cluster"
   ecs_service_name = "frontend-service"
-  repository_id = "federicogfb/teralab2"
+  repository_id = "LisandroAllio/php_inter"
   sns_topic_arn = module.sns_pipeline_notifications.topic_arn
 }
