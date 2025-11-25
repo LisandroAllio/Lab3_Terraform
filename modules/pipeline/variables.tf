@@ -43,3 +43,9 @@ variable "codepipeline_role_name" {
   type = string
   default = "lab-front-pipeline-role"
 }
+
+variable "github_connection_name" {
+  description = "Name for the GitHub CodeStar connection"
+  type        = string
+  default     = "github-connection"
+}

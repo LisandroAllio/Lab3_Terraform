@@ -17,3 +17,13 @@ output "codepipeline_role_arn" {
   description = "ARN of the CodePipeline IAM role"
   value       = aws_iam_role.codepipeline_role.arn
 }
+
+output "github_connection_arn" {
+  description = "ARN of the GitHub CodeStar connection"
+  value       = aws_codestarconnections_connection.git_connection.arn
+}
+
+output "github_connection_status" {
+  description = "Status of the GitHub CodeStar connection"
+  value       = aws_codestarconnections_connection.git_connection.connection_status
+}
