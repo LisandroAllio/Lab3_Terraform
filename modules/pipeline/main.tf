@@ -264,9 +264,10 @@ resource "aws_codepipeline_notification_rule" "pipeline_notifications" {
   }
 
   event_type_ids = [
-    "codepipeline-pipeline-pipeline-execution-failed",
-    "codepipeline-pipeline-pipeline-execution-succeeded",
-    "codepipeline-pipeline-pipeline-execution-canceled",
+    "codepipeline-pipeline-pipeline-execution-started",    # Cuando inicia el pipeline
+    "codepipeline-pipeline-pipeline-execution-succeeded",  # Cuando termina exitosamente
+    "codepipeline-pipeline-pipeline-execution-failed",     # Cuando falla
+    "codepipeline-pipeline-pipeline-execution-canceled",   # Cuando se cancela
     "codepipeline-pipeline-stage-execution-failed",
     "codepipeline-pipeline-stage-execution-succeeded",
     "codepipeline-pipeline-action-execution-failed",
