@@ -21,4 +21,5 @@ module "codepipeline" {
   ecs_cluster_name = "lab3-cluster"
   ecs_service_name = "frontend-service"
   repository_id = "federicogfb/teralab2"
+  sns_topic_arn = module.sns_pipeline_notifications.topic_arn
 }

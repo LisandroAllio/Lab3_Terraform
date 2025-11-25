@@ -43,3 +43,9 @@ variable "codepipeline_role_name" {
   type = string
   default = "lab-front-pipeline-role"
 }
+
+variable "sns_topic_arn" {
+  description = "ARN del topic SNS para notificaciones del pipeline (opcional)"
+  type        = string
+  default     = null
+}
