@@ -1,7 +1,8 @@
 # Data source para obtener tu certificado ACM existente
+# Comentado debido a permisos insuficientes (SCP deny)
 /*
 data "aws_acm_certificate" "main" {
-  domain      = "*.ecastelnuovo.ownboarding.teratest.net"    # O "tudominio.com" si es específico
+  domain      = "*.ecastelnuovo.ownboarding.teratest.net"
   statuses    = ["ISSUED"]
   most_recent = true
 }
