@@ -1,33 +1,69 @@
-# TERALAB 3 - TERRAFORM CHALLENGE
+# TERALAB 3 – Terraform Challenge
 
-## Objetivos:
+## Objetivo
 
-Diseñar, configurar, aprovisionar y desplegar infraestructura altamente disponible, resiliente y escalable para servir a usuarios a traves de internet.
+Diseñar, configurar, aprovisionar y desplegar una infraestructura en AWS que sea:
 
-## Construyendo la solucion:
+- Altamente disponible  
+- Resiliente  
+- Escalable  
+- capaz de servir tráfico a usuarios a través de internet.
 
-Para completar los objetivos establecidos vamos a utilizar dos plataformas esenciales: AWS Cloud para infraestructura cloud, y Terraform como herramienta de IaC.
 
-Esto, junto a metodologias y herramientas Agile, nos permitira crear, testear, implementar, desplegar y mejorar a velocidades y ritmo superiores.
 
-AWS en si nos permite ahorrar en gastos de inversion de infraestructura, en tiempo de aprovisionamiento y facilita la actualizacion de los componentes que conforman la infraestructura. Con AWS pagamos solamente lo que usamos, podemos hacer uso de la capa gratuita en algunos servicios, y tambien nos desligamos de la mantenimiento fisico de la infraestructura; debido al modelo de responsabilidad compartida de AWS, nosotros nos hacemos cargo solamente de la seguridad _*en*_ la infraestructura.
+Para alcanzar estos objetivos utilizamos dos pilares fundamentales:
 
-Terraform nos permite aprovisionar, configurar y mantener infraestructura como codigo. Esto nos da la posiblida de desarrollar infraestructura modular, iterable, testeable y altamente adaptable a distintos casos de uso. Igualmente de importante es la posibilidad de implementar herramientas de versionado de codigo y repositorio remotos para facilitar la colaboracion, aumentar la productividad y la velocidad y numero de despliegues del equipo DevOps.
+- **AWS Cloud** como plataforma de infraestructura.
+- **Terraform** como herramienta de *Infrastructure as Code (IaC)*.
 
-En combinacion, Terraform nos permite llevar las mejores practicas de Infra como Codigo a la nube, y AWS se beneficia de la velocidad de ejecucion de Terraform para desplegar infraestructura de manera sencilla, comoda y sobretodo, rapida.
+Sumado a metodologías y herramientas **ágiles**, esto nos permite:
 
-## Tecnologias y herramientas utilizadas en el desarrollo:
+- Crear, testear, implementar y desplegar cambios rápidamente.
+- Iterar sobre la infraestructura con seguridad y control.
+- Mejorar continuamente la solución sin perder trazabilidad.
 
-- Trello.
-- Terraform.
-- Docker.
-- Github.
-- Git.
-- _Capa gratuita de distintas LLMs_
 
-## Para ir a la implementacion de la infraestructura, [click aca](./01_environments/dev/).
 
-## Integrantes del equipo DevOps:
+**AWS nos permite:**
+
+- Reducir costos de inversión en infraestructura física.
+- Disminuir el tiempo de aprovisionamiento de recursos.
+- Facilitar la actualización y mantenimiento de los componentes de la infraestructura.
+- Pagar únicamente por lo que usamos (*pay as you go*).
+- Aprovechar la **capa gratuita** de varios servicios.
+- Delegar el mantenimiento físico y parte de la seguridad gracias al modelo de **responsabilidad compartida**:  
+  nosotros nos enfocamos en la seguridad **en** la infraestructura, no **de** la infraestructura.
+
+
+**Terraform nos permite:**
+
+- Definir, aprovisionar y gestionar infraestructura como código.
+- Diseñar una infraestructura **modular**, **reutilizable** y **testeable**.
+- Adaptar fácilmente la solución a distintos entornos y casos de uso.
+- Integrar herramientas de **versionado de código** (Git) y **repositorios remotos** (GitHub) para:
+  - Facilitar la colaboración.
+  - Aumentar la productividad.
+  - Incrementar la frecuencia y calidad de los despliegues del equipo DevOps.
+
+En combinación, **Terraform** nos permite llevar las mejores prácticas de IaC a la nube, mientras que **AWS** se beneficia de la velocidad y consistencia de los despliegues automatizados.
+
+
+
+## Tecnologías y herramientas utilizadas
+
+- **Trello** – Gestión de tareas y organización del workflow.
+- **Terraform** – Infraestructura como código.
+- **Docker** – Construcción y empaquetado de aplicaciones en contenedores.
+- **GitHub** – Repositorio remoto y herramienta de colaboración.
+- **Git** – Control de versiones.
+- **Capa gratuita de distintas LLMs** – Asistencia para documentación, ideas y soporte técnico.
+
+
+## Infraestructura
+Para ir a la implementacion de la infraestructura, [click aca](./01_environments/dev/).
+
+
+## 👥 Equipo DevOps
 
 - [Federico](https://github.com/federicogfb)
 - [Lara](https://github.com/LaraSperanza)
