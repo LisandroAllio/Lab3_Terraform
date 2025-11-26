@@ -471,7 +471,7 @@ Se configuran munualmente una vez levantada la infraestructura.
 
 ### pipeline
 
-![pipeline-runtime-gif](https://i.imgur.com/4xRLpXY.mp4)
+![pipeline-runtime-gif](https://i.imgur.com/4xRLpXY.gifv)
 
 **Propósito**: Orquesta el pipeline completo de CI/CD.
 
