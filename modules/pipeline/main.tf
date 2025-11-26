@@ -1,5 +1,5 @@
 resource "aws_codestarconnections_connection" "git_connection" {
-    name = "github-conn-eze-final"
+    name = var.github_connection_name
     provider_type = "GitHub"
 }
 

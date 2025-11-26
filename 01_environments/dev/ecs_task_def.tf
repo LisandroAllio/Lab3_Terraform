@@ -9,6 +9,10 @@ module "ecs_tasks" {
   container_port_front    = 80
   container_port_db       = 3306
   db_host_name            = "/lab3/DB_HOST"
+  db_name                 = "/lab3/mysql/MYSQL_DATABASE"
+  db_user                 = "/lab3/mysql/MYSQL_USER"
+  db_pass                 = "/lab3/mysql/MYSQL_PASSWORD"
+  db_root_pass            = "/lab3/mysql/MYSQL_ROOT_PASSWORD"
   execution_role_arn      = module.iam_roles.task_execution_role_arn
   efs_file_system_id      = module.efs.efs_file_system_id
   efs_access_point_id     = module.efs.efs_access_point_id

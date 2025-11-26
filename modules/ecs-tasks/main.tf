@@ -84,11 +84,17 @@ resource "aws_ecs_task_definition" "task_definition_db" {
       ]
       mountPoints = [
         {
-          sourceVolume  = "lab-3-mysql-efs" 
+          sourceVolume  = "lab-3-mysql-efs"         
           containerPath = "/var/lib/mysql"       
           readOnly      = false
         }
       ]
+      secrets = [
+        { name = "MYSQL_DATABASE", valueFrom = var.db_name },
+        { name = "MYSQL_USER", valueFrom = var.db_user },
+        { name = "MYSQL_PASSWORD", valueFrom = var.db_pass },
+        { name = "MYSQL_ROOT_PASSWORD", valueFrom = var.db_root_pass }
+      ] 
       logConfiguration = {
         logDriver = "awslogs"
         options = {

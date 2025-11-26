@@ -1,3 +1,53 @@
+#### VARIABLES PARA BUILDSPEC ####
+module "parameter_store_aws_region" {
+  source = "terraform-aws-modules/ssm-parameter/aws"
+
+  name  = "/lab/AWS_REGION"
+  value = "us-east-1"
+  tags  = {
+    Name        = "Parameter Store"
+    Environment = "dev"
+    Owner       = "Lisandro"
+  }
+}
+
+module "parameter_store_ecr_registry" {
+  source = "terraform-aws-modules/ssm-parameter/aws"
+
+  name  = "/lab/ECR_REGISTRY"
+  value = "979244568430.dkr.ecr.us-east-1.amazonaws.com"
+  tags  = {
+    Name        = "Parameter Store"
+    Environment = "dev"
+    Owner       = "federico"
+  }
+}
+
+module "parameter_store_image_repo" {
+  source = "terraform-aws-modules/ssm-parameter/aws"
+
+  name  = "/lab/ECR_REPOSITORY"
+  value = "lab/front"
+  tags  = {
+    Name        = "Parameter Store"
+    Environment = "dev"
+    Owner       = "Lisandro"
+  }
+}
+
+module "parameter_store_container" {
+  source = "terraform-aws-modules/ssm-parameter/aws"
+
+  name  = "/lab/CONTAINER_NAME"
+  value = "frontend"
+  tags  = {
+    Name        = "Parameter Store"
+    Environment = "dev"
+    Owner       = "Lisandro"
+  }
+}
+
+#### VARIABLES PARA FRONT ####
 module "parameter_store_db" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
@@ -11,50 +61,55 @@ module "parameter_store_db" {
   }
 }
 
-module "parameter_store_aws_region" {
+#### VARIABLES PARA BD ####
+module "parameter_store_mysql_db" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
-  name  = "/lab/AWS_DEFAULT_REGION"
-  value = "us-east-1"
+  name  = "/lab3/mysql/MYSQL_DATABASE"
+  value = "sample"
+  secure_type = true
   tags  = {
     Name        = "Parameter Store"
     Environment = "dev"
-    Owner       = "federico"
+    Owner       = "Lisandro"
   }
 }
 
-module "parameter_store_account_id" {
+module "parameter_store_root_pw" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
-  name  = "/lab/AWS_ACCOUNT_ID"
-  value = "979244568430"
+  name  = "/lab3/mysql/MYSQL_ROOT_PASSWORD"
+  value = "example"
+  secure_type = true
   tags  = {
     Name        = "Parameter Store"
     Environment = "dev"
-    Owner       = "federico"
+    Owner       = "Lisandro"
   }
 }
 
-module "parameter_store_image_repo" {
+module "parameter_store_mysql_user" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
-  name  = "/lab/IMAGE_REPO_NAME"
-  value = "lab/front"
+  name  = "/lab3/mysql/MYSQL_USER"
+  value = "sampleuser"
+  secure_type = true
   tags  = {
     Name        = "Parameter Store"
     Environment = "dev"
-    Owner       = "federico"
+    Owner       = "Lisandro"
   }
 }
 
-module "parameter_store_container" {
+module "parameter_store_mysql_pw" {
   source = "terraform-aws-modules/ssm-parameter/aws"
 
-  name  = "/lab/CONTAINER_NAME"
-  value = "frontend"
+  name  = "/lab3/mysql/MYSQL_PASSWORD"
+  value = "samplepass"
+  secure_type = true
   tags  = {
     Name        = "Parameter Store"
     Environment = "dev"
-    Owner       = "federico"
+    Owner       = "Lisandro"
   }
 }

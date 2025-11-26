@@ -33,11 +33,6 @@ variable "db_host_name" {
   description = "Nombre del parametro dentro de Parameter Store"
   type        = string
 }
-# NO SE USA
-# variable "task_role_arn" {
-#   description = "El ARN del rol de la tarea"
-#   type        = string
-# }
 
 variable "execution_role_arn" {
   description = "El ARN del rol de ejecución para ECS"
@@ -68,4 +63,24 @@ variable "aws_region" {
   description = "Región de AWS donde se crean los recursos"
   type        = string
   default     = "us-east-1"
+}
+
+variable "db_name" {
+  description = "Nombre del parámetro de Parameter Store para el nombre de la base de datos"
+  type        = string
+}
+
+variable "db_user" {
+  description = "Nombre del parámetro de Parameter Store para el usuario de MySQL"
+  type        = string
+}
+
+variable "db_pass" {
+  description = "Nombre del parámetro de Parameter Store para la contraseña de MySQL"
+  type        = string
+}
+
+variable "db_root_pass" {
+  description = "Nombre del parámetro de Parameter Store para la contraseña root de MySQL"
+  type        = string
 }

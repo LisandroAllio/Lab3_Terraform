@@ -90,30 +90,6 @@ resource "aws_codebuild_project" "frontend" {
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
     privileged_mode             = true  # Required for Docker builds
-
-    environment_variable {
-      name  = "AWS_DEFAULT_REGION"
-      type  = "PARAMETER_STORE"
-      value = "/lab/AWS_DEFAULT_REGION"
-    }
-
-    environment_variable {
-      name  = "AWS_ACCOUNT_ID"
-      type  = "PARAMETER_STORE"
-      value = "/lab/AWS_ACCOUNT_ID"
-    }
-
-    environment_variable {
-      name  = "IMAGE_REPO_NAME"
-      type  = "PARAMETER_STORE"
-      value = "/lab/IMAGE_REPO_NAME"
-    }
-
-    environment_variable {
-      name  = "CONTAINER_NAME"
-      type  = "PARAMETER_STORE"
-      value = "/lab/CONTAINER_NAME"
-    }
   }
 
   source {
