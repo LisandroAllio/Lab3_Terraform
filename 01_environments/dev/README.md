@@ -85,6 +85,17 @@ terraform destroy
 terraform destroy -target=module.ecs_frontend
 ```
 
+### App en funcionamiento
+Una vez levantada la infra, se debe: 
+1. Pushear la imagen de la base de datos al repositorio correpondiente y actualizar el servicio de la base de datos.
+   - `aws ecr get-login-password --region <your-region> | docker login --username AWS --password-stdin <aws-account-id>.dkr.ecr.<your-region>.amazonaws.com`
+   - `docker build -t lab/bd-mysql -f db/Dockerfile .`
+   - `docker tag lab/bd-mysql:latest <repository-uri>:latest`
+   - `docker push <repository-uri>:latest`
+
+2. Correr el pipeline para pushear la imagen del frontend al repo y actualizar el servicio del frontend
+
+
 ## 🌐 Acceso y Endpoints
 
 ### URLs del Entorno
