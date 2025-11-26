@@ -20,6 +20,8 @@ Este directorio contiene la configuración específica para el **entorno de desa
 | **Notificaciones** | SNS | Alertas del pipeline (opcional) |
 
 
+![infra-diagram](https://i.imgur.com/kqyfsP0.png)
+
 ## 📁 Estructura de Archivos
 
 ```
@@ -180,6 +182,8 @@ Se configuran munualmente una vez levantada la infraestructura.
 ### Módulos de CI/CD
 - **CodeBuild**: Construcción de imágenes Docker
 - **CodePipeline**: Pipeline de despliegue automatizado
+
+![pipeline-diagram](https://i.imgur.com/72wh0bB.png)
 
 **A continuacion dejamos una documentacion detallada de cada uno de los modulos:**
 
@@ -466,6 +470,8 @@ Se configuran munualmente una vez levantada la infraestructura.
 ---
 
 ### pipeline
+
+![pipeline-runtime-gif](https://i.imgur.com/J6wMBYX.gif)
 
 **Propósito**: Orquesta el pipeline completo de CI/CD.
 
