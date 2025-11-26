@@ -89,3 +89,9 @@ variable "db_root_pass" {
   description = "Nombre del parámetro de Parameter Store para la contraseña root de MySQL"
   type        = string
 }
+
+variable "common_tags" {
+  description = "Tags comunes aplicados desde el entorno"
+  type        = map(string)
+  default     = {}
+}

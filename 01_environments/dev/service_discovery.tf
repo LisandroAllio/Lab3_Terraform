@@ -2,10 +2,10 @@
 module "service_discovery" {
   source = "../../modules/service-discovery"
 
-  namespace_name        = "ecs-cluster-namespace"
-  namespace_description = "Service Discovery Namespace to use in ECS Cluster"
+  namespace_name        = local.service_discovery_namespace_name
+  namespace_description = local.service_discovery_namespace_description
   vpc_id                = module.vpc.vpc_id
-  service_name          = "database"
+  service_name          = local.service_discovery_service_name
 
   tags = {
     Name        = "Service Discovery"

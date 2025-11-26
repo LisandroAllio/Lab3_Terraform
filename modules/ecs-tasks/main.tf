@@ -2,16 +2,6 @@ data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
 
-locals {
-  region_id  = data.aws_region.current.id
-  account_id = data.aws_caller_identity.current.account_id
-
-  common_tags = {
-    Environment = "dev"
-    Owner       = "Lara"
-  }
-}
-
 resource "aws_ecs_task_definition" "task_definition_front" {
 
   family                = "front_task_def"
@@ -45,8 +35,9 @@ resource "aws_ecs_task_definition" "task_definition_front" {
       }
     }
   ])
-  tags = merge(local.common_tags, {
-    Name = "Task Definition Frontend"
+  tags = merge(var.common_tags, {
+    Name  = "Task Definition Frontend"
+    Owner = "Lara"
   })
 }
 
@@ -89,7 +80,7 @@ resource "aws_ecs_task_definition" "task_definition_db" {
           readOnly      = false
         }
       ]
-      secrets = [
+      secrets = [ ## traer de data
         { name = "MYSQL_DATABASE", valueFrom = var.db_name },
         { name = "MYSQL_USER", valueFrom = var.db_user },
         { name = "MYSQL_PASSWORD", valueFrom = var.db_pass },
@@ -106,7 +97,8 @@ resource "aws_ecs_task_definition" "task_definition_db" {
     }
   ])
 
-  tags = merge(local.common_tags, {
-    Name = "Task Definition Database"
+  tags = merge(var.common_tags, {
+    Name  = "Task Definition Database"
+    Owner = "Lara"
   })
 }

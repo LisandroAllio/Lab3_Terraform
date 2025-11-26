@@ -1,15 +1,8 @@
-locals {
-  name_front = "lab/front"
-  name_bd    = "lab/bd-mysql"
-  common_tags = {
-    Environment = "dev"
-    Owner       = "Lara"
-  }
-}
+
 
 resource "aws_ecr_repository" "repositorio_front" {
   force_delete = true
-  name                 = local.name_front
+  name                 = var.repo_front_name
   image_tag_mutability = var.image_tag_mutability
   encryption_configuration {
     encryption_type = var.encryption_type
@@ -19,16 +12,16 @@ resource "aws_ecr_repository" "repositorio_front" {
     scan_on_push = var.scan_on_push
   }
 
-  tags = merge(local.common_tags, {
+  tags = merge(var.common_tags, {
     Name        = "ECR Repository Frontend"
-    Environment = var.environment
+    Owner       = "Lara"
   })
 
 }
 
 resource "aws_ecr_repository" "repositorio_bd" {
   force_delete = true
-  name                 = local.name_bd
+  name                 = var.repo_bd_name
   image_tag_mutability = var.image_tag_mutability
 
   encryption_configuration {
@@ -39,8 +32,8 @@ resource "aws_ecr_repository" "repositorio_bd" {
     scan_on_push = var.scan_on_push
   }
 
-  tags = merge(local.common_tags, {
+  tags = merge(var.common_tags, {
     Name        = "ECR Repository Base de Datos"
-    Environment = var.environment
+    Owner       = "Lara"
   })
 }

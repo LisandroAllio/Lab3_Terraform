@@ -38,6 +38,12 @@ variable "kms_key_id" {
   default     = null
 }
 
+variable "common_tags" {
+  description = "Tags comunes aplicados desde el entorno"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags adicionales para los recursos"
   type        = map(string)
