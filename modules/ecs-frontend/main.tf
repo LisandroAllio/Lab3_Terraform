@@ -9,6 +9,10 @@ resource "aws_ecs_service" "frontend" {
 
   launch_type = "EC2"
 
+  lifecycle {
+    ignore_changes = [task_definition]
+  }
+
   network_configuration {
     subnets          = var.subnet_ids
     security_groups  = var.security_group_ids

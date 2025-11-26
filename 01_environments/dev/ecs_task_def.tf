@@ -8,11 +8,11 @@ module "ecs_tasks" {
   memory_limit            = local.task_memory_limit
   container_port_front    = local.task_container_port_front
   container_port_db       = local.task_container_port_db
-  db_host_name            = "/lab3/DB_HOST"
-  db_name                 = "/lab3/mysql/MYSQL_DATABASE"
-  db_user                 = "/lab3/mysql/MYSQL_USER"
-  db_pass                 = "/lab3/mysql/MYSQL_PASSWORD"
-  db_root_pass            = "/lab3/mysql/MYSQL_ROOT_PASSWORD"
+  db_host_name            = data.aws_ssm_parameter.db_host.name
+  db_name                 = data.aws_ssm_parameter.mysql_database.name
+  db_user                 = data.aws_ssm_parameter.mysql_user.name
+  db_pass                 = data.aws_ssm_parameter.mysql_password.name
+  db_root_pass            = data.aws_ssm_parameter.mysql_root_password.name
   task_execution_role_name   = "ecs-task-execution-role"
   parameter_store_role_name  = "ecs-parameter-store-read-v2"
   common_tags               = local.common_tags
