@@ -1,3 +1,4 @@
+/*
 #### VARIABLES PARA BUILDSPEC ####
 module "parameter_store_aws_region" {
   source = "terraform-aws-modules/ssm-parameter/aws"
@@ -113,3 +114,4 @@ module "parameter_store_mysql_pw" {
     Owner       = "Lisandro"
   }
 }
+*/
