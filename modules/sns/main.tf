@@ -1,9 +1,5 @@
 locals {
   topic_name = var.topic_name != null ? var.topic_name : "${var.name_prefix}-pipeline-notifications"
-  common_tags = {
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
 }
 
 # SNS Topic para notificaciones del pipeline
@@ -12,7 +8,7 @@ resource "aws_sns_topic" "pipeline_notifications" {
   display_name      = var.display_name != null ? var.display_name : "Pipeline Notifications"
   kms_master_key_id = var.kms_key_id
 
-  tags = merge(local.common_tags, var.tags, {
+  tags = merge(var.common_tags, var.tags, {
     Name = local.topic_name
   })
 }

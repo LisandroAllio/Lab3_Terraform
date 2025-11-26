@@ -13,6 +13,22 @@ variable "scan_on_push" {
   type        = bool
 }
 
+variable "repo_front_name" {
+  description = "Nombre de del repositorio ECR con front"
+  type = string
+}
+
+variable "repo_bd_name" {
+  description = "Nombre de del repositorio ECR con bd"
+  type = string
+}
+
+variable "common_tags" {
+  description = "Tags comunes aplicados desde el entorno"
+  type        = map(string)
+  default     = {}
+}
+
 variable "environment" {
   default = "dev"
 }

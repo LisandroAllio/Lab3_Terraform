@@ -15,6 +15,12 @@ variable "environment" {
   default     = "dev"
 }
 
+variable "common_tags" {
+  description = "Tags comunes aplicados desde el entorno"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "Tags adicionales a aplicar en todos los security groups"
   type        = map(string)

@@ -18,6 +18,24 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
+variable "alb_name" {
+  description = "Nombre del ALB"
+  type        = string
+  default     = null
+}
+
+variable "target_group_name" {
+  description = "Nombre del Target Group"
+  type        = string
+  default     = null
+}
+
+variable "common_tags" {
+  description = "Tags comunes aplicados desde el entorno"
+  type        = map(string)
+  default     = {}
+}
+
 variable "environment" {
   default = "dev"
 }

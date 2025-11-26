@@ -7,11 +7,5 @@ locals {
     cluster = "${var.name_prefix}-cluster-sg"
   }
 
-  base_tags = merge(
-    {
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-    },
-    var.tags
-  )
+  base_tags = merge(var.common_tags, var.tags)
 }
