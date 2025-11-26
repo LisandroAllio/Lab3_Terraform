@@ -48,4 +48,9 @@ variable "github_connection_name" {
   description = "Name for the GitHub CodeStar connection"
   type        = string
   default     = "github-connection"
+  
+variable "sns_topic_arn" {
+  description = "ARN del topic SNS para notificaciones del pipeline (opcional)"
+  type        = string
+  default     = null
 }

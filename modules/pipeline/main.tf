@@ -249,5 +249,28 @@ resource "aws_codepipeline" "codepipeline" {
             }
         }
       }
-    } 
+    }
+}
+
+# Notificaciones SNS para el estado del pipeline (CodePipeline V2)
+resource "aws_codepipeline_notification_rule" "pipeline_notifications" {
+  count = var.sns_topic_arn != null ? 1 : 0
+
+  name       = "${aws_codepipeline.codepipeline.name}-notifications"
+  pipeline_arn = aws_codepipeline.codepipeline.arn
+  target {
+    sns_topic_arn = var.sns_topic_arn
+    type          = "SNS"
+  }
+
+  event_type_ids = [
+    "codepipeline-pipeline-pipeline-execution-started",    # Cuando inicia el pipeline
+    "codepipeline-pipeline-pipeline-execution-succeeded",  # Cuando termina exitosamente
+    "codepipeline-pipeline-pipeline-execution-failed",     # Cuando falla
+    "codepipeline-pipeline-pipeline-execution-canceled",   # Cuando se cancela
+    "codepipeline-pipeline-stage-execution-failed",
+    "codepipeline-pipeline-stage-execution-succeeded",
+    "codepipeline-pipeline-action-execution-failed",
+    "codepipeline-pipeline-action-execution-succeeded"
+  ]
 }
