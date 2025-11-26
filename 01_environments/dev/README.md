@@ -138,24 +138,25 @@ backend "s3" {
 ```
 
 ## 🔐 Secretos y Configuración
+Se configuran munualmente una vez levantada la infraestructura.
 
 ### Parameter Store - Variables de Build
 
 ```
-/lab/AWS_REGION         
-/lab/ECR_REGISTRY      
-/lab/ECR_REPOSITORY     
-/lab/CONTAINER_NAME     
+/lab/AWS_REGION      = us-east-1        
+/lab/ECR_REGISTRY    = 979244568430.dkr.ecr.us-east-1.amazonaws.com
+/lab/ECR_REPOSITORY  = lab/front
+/lab/CONTAINER_NAME  = frontend
 ```
 
 ### Parameter Store - Variables de Aplicación
 
 ```
-/lab3/DB_HOST                   
-/lab3/mysql/MYSQL_DATABASE     
-/lab3/mysql/MYSQL_USER        
-/lab3/mysql/MYSQL_PASSWORD    
-/lab3/mysql/MYSQL_ROOT_PASSWORD 
+/lab3/DB_HOST                     = ${module.service_discovery.service_name}.${module.service_discovery.namespace_name}               
+/lab3/mysql/MYSQL_DATABASE        = sample
+/lab3/mysql/MYSQL_USER            = sampleuser
+/lab3/mysql/MYSQL_PASSWORD        = samplepass
+/lab3/mysql/MYSQL_ROOT_PASSWORD   = example
 ```
 
 ## Módulos Terraform
