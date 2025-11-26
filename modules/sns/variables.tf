@@ -1,51 +1,27 @@
 variable "name_prefix" {
-  description = "Prefijo para el nombre del topic SNS"
+  description = "Prefijo usado para nombrar los recursos de SNS"
   type        = string
-  default     = "lab3"
 }
 
-variable "topic_name" {
-  description = "Nombre del topic SNS (opcional, se genera automáticamente si no se especifica)"
+variable "pipeline_name" {
+  description = "Nombre del pipeline cuyo estado se va a monitorear"
   type        = string
-  default     = null
 }
 
-variable "display_name" {
-  description = "Nombre para mostrar del topic SNS"
+variable "stage_name" {
+  description = "Nombre del stage que se monitoreará para eventos de inicio (por defecto Source)"
   type        = string
-  default     = null
+  default     = "Source"
 }
 
-variable "email_addresses" {
-  description = "Lista de direcciones de correo para suscribir al topic"
+variable "email_subscriptions" {
+  description = "Direcciones de correo que recibirán las notificaciones"
   type        = list(string)
-}
-
-variable "environment" {
-  description = "Entorno (dev, prod, etc.)"
-  type        = string
-  default     = "dev"
-}
-
-variable "aws_account_id" {
-  description = "ID de la cuenta de AWS"
-  type        = string
-}
-
-variable "kms_key_id" {
-  description = "ID de la clave KMS para cifrar el topic (opcional)"
-  type        = string
-  default     = null
-}
-
-variable "common_tags" {
-  description = "Tags comunes aplicados desde el entorno"
-  type        = map(string)
-  default     = {}
+  default     = []
 }
 
 variable "tags" {
-  description = "Tags adicionales para los recursos"
+  description = "Map de tags a aplicar en los recursos SNS"
   type        = map(string)
   default     = {}
 }

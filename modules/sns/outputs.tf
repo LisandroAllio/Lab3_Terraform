@@ -10,6 +10,6 @@ output "topic_name" {
 
 output "subscription_arns" {
   description = "ARNs de las suscripciones creadas"
-  value       = aws_sns_topic_subscription.email[*].arn
+  value       = [for subscription in aws_sns_topic_subscription.emails : subscription.arn]
 }
 
