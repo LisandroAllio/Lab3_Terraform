@@ -12,3 +12,13 @@ output "launch_template_id" {
   description = "ID of the launch template"
   value       = aws_launch_template.ecs.id
 }
+
+output "instance_profile_arn" {
+  description = "ARN of the IAM instance profile"
+  value       = aws_iam_instance_profile.ecs_instance.arn
+}
+
+output "instance_role_arn" {
+  description = "ARN of the IAM instance role"
+  value       = aws_iam_role.ecs_instance.arn
+}

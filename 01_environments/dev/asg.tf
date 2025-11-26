@@ -10,7 +10,8 @@ module "ecs_asg" {
   instance_name              = "ECS Instance"
   launch_template_prefix     = "ecs-instance-"
   instance_type              = "t2.micro"
-  iam_instance_profile_arn   = module.iam_roles.instance_profile_arn
+  instance_profile_name      = "ecs-instance-profile"
+  instance_role_name         = "ecs-instance-role"
   security_group_ids         = [module.security_groups.cluster_security_group_id]
   cluster_name               = "lab3-cluster"
 

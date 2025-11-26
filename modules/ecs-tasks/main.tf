@@ -18,7 +18,7 @@ resource "aws_ecs_task_definition" "task_definition_front" {
   network_mode          = "awsvpc"
   cpu                   = var.cpu_units
   memory                = var.memory_limit
-  execution_role_arn    = var.execution_role_arn
+  execution_role_arn    = aws_iam_role.ecs_task_execution.arn
   runtime_platform {
     operating_system_family = "LINUX"
     cpu_architecture = "X86_64"
@@ -55,7 +55,7 @@ resource "aws_ecs_task_definition" "task_definition_db" {
   network_mode          = "awsvpc"
   cpu                   = var.cpu_units
   memory                = var.memory_limit
-  execution_role_arn    = var.execution_role_arn
+  execution_role_arn    = aws_iam_role.ecs_task_execution.arn
   runtime_platform {
     operating_system_family = "LINUX"
     cpu_architecture = "X86_64"

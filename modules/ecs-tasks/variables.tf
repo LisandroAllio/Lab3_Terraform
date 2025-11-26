@@ -34,8 +34,13 @@ variable "db_host_name" {
   type        = string
 }
 
-variable "execution_role_arn" {
-  description = "El ARN del rol de ejecución para ECS"
+variable "task_execution_role_name" {
+  description = "Name of the ECS task execution role"
+  type        = string
+}
+
+variable "parameter_store_role_name" {
+  description = "Name of the parameter store policy"
   type        = string
 }
 

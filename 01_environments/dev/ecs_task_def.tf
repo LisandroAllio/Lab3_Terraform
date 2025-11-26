@@ -13,7 +13,8 @@ module "ecs_tasks" {
   db_user                 = "/lab3/mysql/MYSQL_USER"
   db_pass                 = "/lab3/mysql/MYSQL_PASSWORD"
   db_root_pass            = "/lab3/mysql/MYSQL_ROOT_PASSWORD"
-  execution_role_arn      = module.iam_roles.task_execution_role_arn
+  task_execution_role_name   = "ecs-task-execution-role"
+  parameter_store_role_name  = "ecs-parameter-store-read-v2"
   efs_file_system_id      = module.efs.efs_file_system_id
   efs_access_point_id     = module.efs.efs_access_point_id
   frontend_log_group_name = module.cloudwatch.frontend_log_group_name
