@@ -45,7 +45,7 @@ resource "aws_launch_template" "ecs" {
   instance_type = var.instance_type
 
   iam_instance_profile {
-    arn = var.iam_instance_profile_arn
+    arn = aws_iam_instance_profile.ecs_instance.arn
   }
 
   network_interfaces {
