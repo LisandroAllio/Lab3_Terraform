@@ -2,9 +2,9 @@
 module "ecs_cluster" {
   source = "../../modules/ecs-cluster"
 
-  cluster_name           = "lab3-cluster"
-  capacity_provider_name = "lab3-capacity-provider"
-  asg_arn               = module.ecs_asg.asg_arn
+  cluster_name           = local.ecs_cluster_name
+  capacity_provider_name = local.ecs_capacity_provider_name
+  asg_arn                = module.ecs_asg.asg_arn
 
   tags = {
     Name        = "My ECS Cluster"

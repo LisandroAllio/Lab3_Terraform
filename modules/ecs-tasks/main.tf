@@ -80,7 +80,7 @@ resource "aws_ecs_task_definition" "task_definition_db" {
           readOnly      = false
         }
       ]
-      secrets = [
+      secrets = [ ## traer de data
         { name = "MYSQL_DATABASE", valueFrom = var.db_name },
         { name = "MYSQL_USER", valueFrom = var.db_user },
         { name = "MYSQL_PASSWORD", valueFrom = var.db_pass },
