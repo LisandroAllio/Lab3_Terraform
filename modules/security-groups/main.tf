@@ -37,14 +37,6 @@ resource "aws_security_group" "front" {
   description = "Security group para las tasks frontend"
   vpc_id      = var.vpc_id
 
-  egress {
-    description = "Salida total"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   tags = merge(local.base_tags, { Name = local.sg_names.front })
 }
 
@@ -106,7 +98,6 @@ resource "aws_security_group_rule" "ecs_ingress_from_alb" {
 }
 
 # Task Front - Egress to Mysql
-/*
 resource "aws_security_group_rule" "front_egress_to_mysql" {
   description              = "Egress desde Frontend hacia MySQL"
   type                     = "egress"
@@ -116,7 +107,6 @@ resource "aws_security_group_rule" "front_egress_to_mysql" {
   security_group_id        = aws_security_group.front.id
   source_security_group_id = aws_security_group.mysql.id
 }
-*/
 
 # Task MySQL - Ingress from Front
 resource "aws_security_group_rule" "mysql_ingress_from_ecs" {
