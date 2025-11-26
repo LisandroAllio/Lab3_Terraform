@@ -1,7 +1,7 @@
 # Infraestructura que sera desplegada:
 
 | Categoría | Componentes |
-|-----------|-------------|
+|-------------------------------|---------------------------------|
 | **Computo** | Instancias EC2 |
 | **Orquestacion** | ECS Cluster<br>ECS Tasks Definitions<br>ECS Services |
 | **Balanceador** | ALB<br>Target Group |
