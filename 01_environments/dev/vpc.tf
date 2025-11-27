@@ -2,7 +2,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "lab3_vpc"
+  name = local.vpc_name
   cidr = local.vpc_cidr
 
   azs             = local.azs

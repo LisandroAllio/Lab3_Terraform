@@ -8,7 +8,7 @@ locals {
   name_prefix = "${local.project}"
   
   # VPC Configuration
-  lab3_vpc       = "lab3_vpc"
+  vpc_name       = "lab3_vpc"
   vpc_cidr       = "10.0.0.0/16"
   azs            = ["${local.region}a", "${local.region}b"]
   subnet_newbits = 9

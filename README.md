@@ -77,6 +77,13 @@ aws sts get-caller-identity
 - CodeBuild, CodePipeline (full access)
 - IAM (para crear y eliminar roles y policies)
 
+## 🌐 Acceso y Endpoints
+
+### URLs del Entorno
+
+- **Aplicación Principal**: https://alb.ecastelnuovo.ownboarding.teratest.net
+
+
 ## 🛠️ Implementacio y Despliegue de la Infraestructura
 
 Para ir a la implementacion de la infraestructura, [click aca](./01_environments/dev/).
