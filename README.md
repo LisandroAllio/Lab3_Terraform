@@ -81,6 +81,10 @@ aws sts get-caller-identity
 
 Para ir a la implementacion de la infraestructura, [click aca](./01_environments/dev/).
 
+### Resultado Final
+
+![infra-diagram-v2](https://i.imgur.com/LxUqFjq.png)
+
 ## 👥 Equipo DevOps
 
 - [Federico](https://github.com/federicogfb) 
