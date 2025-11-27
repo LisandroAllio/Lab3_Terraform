@@ -96,16 +96,6 @@ Una vez levantada la infra, se debe:
 2. Correr el pipeline para pushear la imagen del frontend al repo y actualizar el servicio del frontend
 
 
-## 🌐 Acceso y Endpoints
-
-### URLs del Entorno
-
-- **Aplicación Principal**: https://alb.ecastelnuovo.ownboarding.teratest.net
-- **ALB DNS**: Disponible en `terraform output alb_dns_name`
-- **Repositorio ECR Frontend**: `979244568430.dkr.ecr.us-east-1.amazonaws.com/lab/front`
-- **Repositorio ECR MySQL**: `979244568430.dkr.ecr.us-east-1.amazonaws.com/lab/bd-mysql`
-
-
 ## ⚙️ Configuración Específica del Entorno
 
 ### Variables Principales 

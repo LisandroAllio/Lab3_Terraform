@@ -12,7 +12,7 @@ module "ecs_tasks" {
   #Front Configurations
   image_uri_front         = "${module.ecr.front_repository_url}:latest"
   container_port_front    = local.task_container_port_front
-  db_host_name            = module.parameter_store_db.name
+  db_host_name            = module.parameter_store_db.ssm_parameter_name
   frontend_log_group_name = module.cloudwatch.frontend_log_group_name
   
   #BD Configurations
