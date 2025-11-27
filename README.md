@@ -95,4 +95,8 @@ Para ir a la implementacion de la infraestructura, [click aca](./01_environments
 - **GitHub**: Control de versiones y colaboración
 - **LLMs**: Asistencia técnica y documentación
 
+## Resultado Final
+
+![infra-diagram-v2](https://i.imgur.com/LxUqFjq.png)
+
 ---
