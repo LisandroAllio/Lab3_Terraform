@@ -1,4 +1,3 @@
-#### DATA SOURCES PARA LEER PARAMETROS EXISTENTES ####
 #### VARIABLES PARA BUILDSPEC ####
 data "aws_ssm_parameter" "aws_region" {
   name = "/lab/AWS_REGION"
@@ -17,12 +16,6 @@ data "aws_ssm_parameter" "ecr_repository" {
 
 data "aws_ssm_parameter" "container_name" {
   name = "/lab/CONTAINER_NAME"
-  with_decryption = true
-}
-
-#### VARIABLES PARA FRONT ####
-data "aws_ssm_parameter" "db_host" {
-  name = "/lab3/DB_HOST"
   with_decryption = true
 }
 
@@ -46,3 +39,13 @@ data "aws_ssm_parameter" "mysql_password" {
   name = "/lab3/mysql/MYSQL_PASSWORD"
   with_decryption = true
 }
+
+### VARIABLE Conexion de Front y BD ###
+module "parameter_store_db" {
+  source = "terraform-aws-modules/ssm-parameter/aws"
+
+  name  = "/lab3/DB_HOST"
+  value = "${module.service_discovery.service_name}.${module.service_discovery.namespace_name}"
+  secure_type = true
+}
+
